@@ -17,8 +17,7 @@ Scrapes data from SharePoint's Storage Management screen, capturing the data in 
    * For each object that meets the threshold at `stormanAudit.logObjectSizeLowerThreshold`, we check if it's a link that lets us drill down to its sub-objects
      * If an object has sub-objects, we append an element to `stormanAudit.arrSubentries` to queue the retrieval of those
    * If the last site object shown on the page meets the threshold at `stormanAudit.logObjectSizeLowerThreshold`, we append an element to `stormanAudit.arrSubentries` to queue the retrieval of the next page of results
-6. It waits for all promises under `stormanAudit.arrPromises` to be finished
-7. It begins its semi-recursive* functionality by calling `stormanAudit.captureResultsThenGetSubEntries` which does the following:
+3. It begins its semi-recursive* functionality by calling `stormanAudit.captureResultsThenGetSubEntries` which does the following:
    * Checks if `stormanAudit.arrPromises.length` is > 0, and if so...
      * Calls `stormanAudit.waitForAllData` to check the promises under `stormanAudit.arrPromises` to see if they are done, removing the completed promises as it goes until the array is empty
      * Calls `stormanAudit.captureFilteredResults` to create list items in the records list for each item scraped from the storage management page(s) into the array `stormanAudit.arrEntries`, capturing each element as a list item in the records list, appending the promise for each ansynchronous AJAX call to create the item to `stormanAudit.arrCreateItemPromises`

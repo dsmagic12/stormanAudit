@@ -1,7 +1,7 @@
 # stormanAudit
 Scrapes data from SharePoint's Storage Management screen, capturing the data in a list
 
-## basic usage
+# basic usage
 1. Visit the storage management page at [http://{TOP-LEVEL_SITE_URL}/_layouts/15/storman.aspx](http://{TOP-LEVEL_SITE_URL}/_layouts/15/storman.aspx) (this will get SharePoint to index your site's contents)
 2. Wait a few minutes, then refresh the page
 3. Run the code in stormanAudit.js
@@ -10,8 +10,7 @@ Scrapes data from SharePoint's Storage Management screen, capturing the data in 
 6. Use a tool such as MS Access to analyze the results in the records list
 
 ## details of the code
-
-###Briefly, the code does the following:
+### Briefly, the code does the following:
 1. It checks if the records list exists, and if not creates it + adds fields to capture the details of each site object
 2. It scrapes the first page of site objects from the storage management page
    - It captures each site object on the page in stormanAudit.arrEntries

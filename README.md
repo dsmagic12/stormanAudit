@@ -13,9 +13,10 @@ Scrapes data from SharePoint's Storage Management screen, capturing the data in 
 ### Briefly, the code does the following:
 1. It checks if the records list exists, and if not creates it + adds fields to capture the details of each site object
 2. It scrapes the first page of site objects from the storage management page
-   - It captures each site object on the page in stormanAudit.arrEntries
-   - For each object that meets the threshold at stormanAudit.logObjectSizeLowerThreshold, we check if it's a link that lets us drill down to its sub-objects. If so, we append an element to stormanAudit.arrSubentries to queue the retrieval of those.
-  - If the last site object shown on the page meets the threshold at stormanAudit.logObjectSizeLowerThreshold, we append an element to stormanAudit.arrSubentries to queue the retrieval of the next page of results
+   * It captures each site object on the page in stormanAudit.arrEntries
+   * For each object that meets the threshold at stormanAudit.logObjectSizeLowerThreshold, we check if it's a link that lets us drill down to its sub-objects
+     * If an object has sub-objects, we append an element to stormanAudit.arrSubentries to queue the retrieval of those
+   * If the last site object shown on the page meets the threshold at stormanAudit.logObjectSizeLowerThreshold, we append an element to stormanAudit.arrSubentries to queue the retrieval of the next page of results
 3. It loops through the contents of stormanAudit.arrEntries, capturing each element as a list item in the records list, appending the promise for each ansynchronous AJAX call to create the item to stormanAudit.arrCreateItemPromises
 4. It waits for all promises in stormanAudit.arrCreateItemPromises to be finished
 5. It recursively retrieves the sub-objects and "next pages" currently under stormanAudit.arrSubentries, calling itself repeatedly until we get through the full contents of the site that meet our threshold
